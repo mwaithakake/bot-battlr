@@ -1,13 +1,6 @@
 import React from "react"
 
-const botData = {
-  Assault: "icon military",
-  Defender: "icon shield",
-  Support: "icon plus circle",
-  Medic: "icon ambulance",
-  Witch: "icon magic",
-  Captain: "icon star"
-}
+
 function BotDisplay({bot,action,removeCard}){
    
   function handleClick(event) {

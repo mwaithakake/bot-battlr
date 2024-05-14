@@ -1,5 +1,5 @@
 .botData{
-  background-color:whitesmoke;
+  background-color:black;
  
 }
 
@@ -11,7 +11,7 @@
 .bot-army {
   min-height: 300px;
   max-width: 100%;
-  background-color:yellowgreen;
+background-color: bisque;
   
   
 }
@@ -19,5 +19,16 @@
 .column{
 padding:20px;
 
+}
 
+.p{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 200;
+}
+
+.bot-collection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
