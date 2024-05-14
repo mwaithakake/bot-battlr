@@ -1,5 +1,5 @@
 import React from "react"
-import BotsPage from "./containers/BotsPage"
+import BotsPage from "./pages/BotsPage"
 import "./App.css"
 
 export default function App() {

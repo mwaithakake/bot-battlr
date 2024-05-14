@@ -8,7 +8,7 @@ const botData = {
   Witch: "icon magic",
   Captain: "icon star"
 }
-function BotCard({bot,action,removeCard}){
+function BotDisplay({bot,action,removeCard}){
    
   function handleClick(event) {
     console.log("Button is clicked")
@@ -55,4 +55,4 @@ function BotCard({bot,action,removeCard}){
   )
 }
 
-export default BotCard
+export default BotDisplay

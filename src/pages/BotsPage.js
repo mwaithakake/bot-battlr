@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BotCollection from './BotCollection';
 import BotArmy from './YourBotArmy';
-import BotSpecs from '../components/BotSpecs';
+import BotDetails from '../components/BotDetails';
 
 function BotsPage() {
   const [botCollection, setBotCollection] = useState([]);
@@ -10,53 +10,69 @@ function BotsPage() {
   const [collectionVisible, setCollectionVisible] = useState(true);
   const [botSpecs, setBotSpecs] = useState({});
 
-  useEffect(() => {
+  useEffect(function fetchData() {
     fetch('https://json-server-3-dp5g.onrender.com/bots')
       .then(response => response.json())
-      .then(bots => {
+      .then(function(bots) {
         setBotCollection(bots);
         setFilteredCollection(bots);
       })
-      .then(() => console.log("Bots Fetched!"));
+      .then(function() {
+        console.log("Bots Fetched!");
+      });
   }, []);
 
-  const addToArmy = (bot) => {
-    const newCollection = filteredCollection.filter(card => card.bot_class !== bot.bot_class);
+  function addToArmy(bot) {
+    const newCollection = filteredCollection.filter(function(card) {
+      return card.bot_class !== bot.bot_class;
+    });
     setFilteredCollection(newCollection);
     setBotArmy([...botArmy, bot]);
     setCollectionVisible(true);
-  };
+  }
 
-  const removeFromArmy = (bot) => {
-    const newArmy = botArmy.filter(card => card.id !== bot.id);
-    const armyClasses = newArmy.map(bot => bot.bot_class);
-    const newCollection = botCollection.filter(bot => !armyClasses.includes(bot.bot_class));
+  function removeFromArmy(bot) {
+    const newArmy = botArmy.filter(function(card) {
+      return card.id !== bot.id;
+    });
+    const armyClasses = newArmy.map(function(bot) {
+      return bot.bot_class;
+    });
+    const newCollection = botCollection.filter(function(bot) {
+      return !armyClasses.includes(bot.bot_class);
+    });
     setBotArmy(newArmy);
     setFilteredCollection(newCollection);
-  };
+  }
 
-  const removeBotPermanently = (bot) => {
-    const newCollection = botCollection.filter(card => card !== bot);
-    const newFilteredCollection = filteredCollection.filter(card => card !== bot);
-    const newArmy = botArmy.filter(card => card !== bot);
+  function removeBotPermanently(bot) {
+    const newCollection = botCollection.filter(function(card) {
+      return card !== bot;
+    });
+    const newFilteredCollection = filteredCollection.filter(function(card) {
+      return card !== bot;
+    });
+    const newArmy = botArmy.filter(function(card) {
+      return card !== bot;
+    });
     setBotCollection(newCollection);
     setFilteredCollection(newFilteredCollection);
     setBotArmy(newArmy);
 
-    fetch(`https://json-server-3-dp5g.onrender.com/bots${bot.id}`, {
+    fetch(`https://json-server-3-dp5g.onrender.com/bots/${bot.id}`, {
       method: 'DELETE'
     }).then(response => response.json())
       .then(result => console.log(result));
-  };
+  }
 
-  const displayBotSpecs = (bot) => {
+  function displayBotSpecs(bot) {
     setCollectionVisible(false);
     setBotSpecs(bot);
-  };
+  }
 
-  const displayBotCollection = () => {
+  function displayBotCollection() {
     setCollectionVisible(true);
-  };
+  }
 
   return (
     <div>
@@ -69,7 +85,7 @@ function BotsPage() {
           botCollection={filteredCollection}
           action={displayBotSpecs}
           removeCard={removeBotPermanently} />
-        : <BotSpecs
+        : <BotDetails
           bot={botSpecs}
           back={displayBotCollection}
           enlist={addToArmy} />
