@@ -4,9 +4,9 @@ import '../App.css'; // Import CSS file
 
 function BotCollection({ botCollection, action, removeCard }) {
   return (
-    <div className="bot-collection"> {/* Apply grid styling */}
+    <div className="bot-collection"> 
       {botCollection.map(bot => (
-        <div key={bot.id} className="bot-card"> {/* Apply individual card styling */}
+        <div key={bot.id} className="bot-card"> 
           <BotDisplay bot={bot} action={action} removeCard={removeCard} />
         </div>
       ))}
